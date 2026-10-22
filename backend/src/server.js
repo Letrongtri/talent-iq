@@ -1,10 +1,22 @@
-import express from "express";
-import { ENV } from "./lib/env.js";
+import express from 'express'
+import path from 'path'
+import { ENV } from './lib/env.js'
 
-const app = express();
+const app = express()
 
-app.get("/health", (req, res) => {
-  res.status(200).json({ msg: "API is up and running" });
-});
+const __dirname = path.resolve()
 
-app.listen(3000, () => console.log("Server is running on port", ENV.PORT));
+app.get('/health', (req, res) => {
+  res.status(200).json({ msg: 'API is up and running' })
+})
+
+// make app ready for production
+if (ENV.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend', 'dist')))
+
+  app.get('/{*any}', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend', 'dist', 'index.html'))
+  })
+}
+
+app.listen(3000, () => console.log('Server is running on port', ENV.PORT))
