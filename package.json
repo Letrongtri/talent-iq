@@ -18,8 +18,5 @@
   "bugs": {
     "url": "https://github.com/Letrongtri/talent-iq/issues"
   },
-  "homepage": "https://github.com/Letrongtri/talent-iq#readme",
-  "dependencies": {
-    "stream-chat": "^9.54.0"
-  }
+  "homepage": "https://github.com/Letrongtri/talent-iq#readme"
 }
